@@ -42,7 +42,7 @@
     </div>
   </section>
   <!-- Divider Section-->
-  <section style="background: url({% static 'img/divider-bg.jpg' %}); background-size: cover; background-position: center bottom" class="divider">
+  <section style="background: url({% static 'img/sabbir.jpg' %}); background-size: cover; background-position: center bottom" class="divider">
     <div class="container">
       <div class="row">
         <div class="col-md-7">
@@ -90,7 +90,8 @@
        
         <div class="col-md-8">
           <div class="form-holder">
-            <form action="#">
+            <form action="."  method="POST">
+              {% csrf_token %}
               <div class="form-group">
                 <input type="email" name="email" id="email" placeholder="Type your email address">
                 <button type="submit" class="submit">Subscribe</button>
@@ -108,26 +109,6 @@
       </div>
     </div>
   </section>
-  <!-- Gallery Section-->
-  <section class="gallery no-padding">    
-    <div class="row">
-      <div class="mix col-lg-3 col-md-3 col-sm-6">
-        <div class="item"><a href="img/gallery-1.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-1.jpg' %}" alt="..." class="img-fluid">
-            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-      </div>
-      <div class="mix col-lg-3 col-md-3 col-sm-6">
-        <div class="item"><a href="img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-2.jpg' %}" alt="..." class="img-fluid">
-            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-      </div>
-      <div class="mix col-lg-3 col-md-3 col-sm-6">
-        <div class="item"><a href="img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-3.jpg' %}" alt="..." class="img-fluid">
-            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-      </div>
-      <div class="mix col-lg-3 col-md-3 col-sm-6">
-        <div class="item"><a href="img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-4.jpg' %}" alt="..." class="img-fluid">
-            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-      </div>
-    </div>
-  </section>    
+ 
  
 {% endblock content %}

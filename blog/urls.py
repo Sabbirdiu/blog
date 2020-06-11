@@ -4,13 +4,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from posts.views import index, blog,post
+from posts.views import index, post_list,post,search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
-    path('blog/',blog),
-    path('post/',post),
+    path('blog/',post_list),
+     path('search/',search,name='search'),
+    # path('post/',post),
+    path('post/<id>/',post, name='post-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

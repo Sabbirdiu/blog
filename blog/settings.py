@@ -33,6 +33,12 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'marketing.apps.MarketingConfig',
+
+    # trd party package
+    
+    'ckeditor',
+    'ckeditor_uploader',
+    #locacl
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +130,14 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+
+CKEDITOR_CONFIGS = {
+    'default':{
+        'toolbar':'full',
+        'width':1000,
+        'height':400,
+        'extraPlugins': ','.join(['codesnippet']),
+    }
+}

@@ -1,6 +1,9 @@
+
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from ckeditor.fields import  RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 User = get_user_model()
 
@@ -18,9 +21,9 @@ class Category(models.Model):
         return self.title
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    overview = models.TextField()
+    overview = RichTextUploadingField()
     timestamp = models.DateTimeField(auto_now_add=True)
-   
+  
     comment_count = models.IntegerField(default = 0)
     view_count = models.IntegerField(default = 0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)

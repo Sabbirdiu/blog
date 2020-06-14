@@ -53,7 +53,7 @@
             <div class="post-body">
               {{ post.overview | safe }}
             </div>
-            <!-- <div
+            <div
               class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"
             >
               {% if post.previous_post %}
@@ -79,15 +79,16 @@
                 <div class="icon next"><i class="fa fa-angle-right"> </i></div>
               </a>
               {% endif %}
-            </div> -->
+            </div> 
+            
             <div class="post-comments">
-              <header>
+              <!-- <header>
                 <h3 class="h6">
                   Post Comments<span class="no-of-comments"
                     >({{ post.comments.count }})</span
                   >
                 </h3>
-              </header>
+              </header> -->
               <!-- {% for comment in post.get_comments %}
               <div class="comment">
                 <div class="comment-header d-flex justify-content-between">

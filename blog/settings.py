@@ -34,10 +34,12 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'marketing.apps.MarketingConfig',
 
-    # trd party package
+    # 3rd party package
     
     'ckeditor',
     'ckeditor_uploader',
+    'hitcount',
+
     #locacl
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,3 +143,5 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join(['codesnippet']),
     }
 }
+# default value
+HITCOUNT_HITS_PER_IP_LIMIT = 0

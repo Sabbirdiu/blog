@@ -3,6 +3,8 @@ from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
 from marketing.models import Signup
+from hitcount.views import HitCountDetailView
+from django.views.generic import  DetailView
 # Create your views here.
 
 def search(request):
@@ -63,13 +65,55 @@ def post_list(request):
         # 'form': form
     }
     return render(request, 'blog.html', context)
-def post(request, id):
-    category_count = get_category_count()
-    most_recent = Post.objects.order_by('-timestamp')[:6]
-    post = get_object_or_404(Post, id=id)
-    context = {
-        'post':post,
-        'most_recent': most_recent,
-        'category_count': category_count,
-    }
-    return render(request, 'post.html',context)     
+# def post(request, id):
+#     category_count = get_category_count()
+#     most_recent = Post.objects.order_by('-timestamp')[:6]
+#     post = get_object_or_404(Post, id=id)
+#     context = {
+#         'post':post,
+#         'most_recent': most_recent,
+#         'category_count': category_count,
+#     }
+#     return render(request, 'post.html',context)   
+
+
+class PostDetailView(HitCountDetailView):
+    model = Post
+    template_name = 'post.html'
+    context_object_name = 'post'
+    count_hit = True
+    
+
+    # def get_object(self):
+    #     obj = super().get_object()
+    #     if self.request.user.is_authenticated:
+    #         PostView.objects.get_or_create(
+    #             user=self.request.user,
+    #             post=obj
+    #         )
+    #     return obj
+
+    def get_context_data(self, **kwargs):
+        category_count = get_category_count()
+        most_recent = Post.objects.order_by('-timestamp')[:3]
+        popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
+        context = super().get_context_data(**kwargs)
+        context["popular_posts"] = popular_posts
+        context['most_recent'] = most_recent
+        # context['page_request_var'] = "page"
+        context['category_count'] = category_count
+        # context['form'] = self.form
+        return context
+
+    # def post(self, request, *args, **kwargs):
+    #     # form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         post = self.get_object()
+    #         form.instance.user = request.user
+    #         form.instance.post = post
+    #         form.save()
+    #         return redirect(reverse("post-detail", kwargs={
+    #             'pk': post.pk
+    #         }))
+
+

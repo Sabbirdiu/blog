@@ -4,6 +4,9 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from ckeditor.fields import  RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+# for hitcount
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCount, HitCountMixin
 
 User = get_user_model()
 
@@ -25,6 +28,10 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
   
     comment_count = models.IntegerField(default = 0)
+    # 3rd party field
+    hit_count = GenericRelation(
+                HitCount, object_id_field='object_pk',
+                related_query_name='hit_count_generic_relation')
     view_count = models.IntegerField(default = 0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
@@ -34,11 +41,16 @@ class Post(models.Model):
         'self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
     next_post = models.ForeignKey(
         'self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
+
    
     def __str__(self):
         return self.title
 
+    
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={
-            'id': self.id
-        })    
+            'pk': self.pk
+        })
+# you would access your hit_count like so:
+                # total number of hits
+# my_model.hit_count.hits_in_last(days=7) # number of hits in last seven days        

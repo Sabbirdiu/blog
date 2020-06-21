@@ -95,7 +95,7 @@ class PostDetailView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_recent = Post.objects.order_by('-timestamp')[:5]
         popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
         context = super().get_context_data(**kwargs)
         context["popular_posts"] = popular_posts

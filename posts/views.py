@@ -95,11 +95,14 @@ class PostDetailView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
+        this_post = Post.objects.filter(id=self.object.id)
         most_recent = Post.objects.order_by('-timestamp')[:5]
         popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
+        tags = [tag.strip() for tag in this_post[0].tags.split(',')]
         context = super().get_context_data(**kwargs)
         context["popular_posts"] = popular_posts
         context['most_recent'] = most_recent
+        context["tags"] = tags
         # context['page_request_var'] = "page"
         context['category_count'] = category_count
         # context['form'] = self.form

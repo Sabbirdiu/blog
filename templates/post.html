@@ -136,13 +136,11 @@
         <header>
           <h3 class="h6">Tags</h3>
         </header>
+        {% for tag in tags %}
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
-          <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
-          <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
-          <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
-          <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
+          <li class="list-inline-item"><a href="#" class="tag">{{ tag }}</a></li>
         </ul>
+        {% endfor %}
       </div>
     </aside>
     

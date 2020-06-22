@@ -24,6 +24,16 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse('posts_in_category', kwargs={
+            'id': self.id
+        })
+    
+    def save(self, *args, **kwargs):
+        if self.title:
+            self.title = self.title.capitalize()
+
+        super(Category, self).save(*args, **kwargs)    
 #use for tags 
 only_aphabets =  RegexValidator(r'^[, a-zA-Z]*$', 'Enter comma separated tags. (use space for two words tag)')        
 class Post(models.Model):

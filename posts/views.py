@@ -1,7 +1,7 @@
 from django.db.models import Count, Q
 from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Post
+from .models import Post,Category
 from marketing.models import Signup
 from hitcount.views import HitCountDetailView
 from django.views.generic import  DetailView
@@ -42,8 +42,9 @@ def get_category_count():
         .values('categories__title') \
         .annotate(Count('categories__title'))
     return queryset
-
+ 
 def post_list(request):
+    categories = Category.objects.all()
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     post_list = Post.objects.all()
@@ -61,7 +62,8 @@ def post_list(request):
         'queryset': paginated_queryset,
         'most_recent': most_recent,
         'page_request_var': page_request_var,
-        'category_count': category_count,
+        'categories': categories,
+        'category_count': category_count, 
         # 'form': form
     }
     return render(request, 'blog.html', context)
@@ -76,7 +78,29 @@ def post_list(request):
 #     }
 #     return render(request, 'post.html',context)   
 
+def Posts_in_CategoryView(request, id):
+    category = get_object_or_404(Category, id = id)
+    posts_in_cat = category.post_set.all()
 
+    # pagination
+    paginator = Paginator(posts_in_cat, 8) # Show 8 posts per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+            'posts_in_cat':posts_in_cat,
+            'cat_name': category,
+            'page_obj': page_obj,
+    }
+   
+   
+    
+    return render(request, 'posts_in_category.html', context)
+    
+   
+      
+
+    return render(request, 'blog/posts_in_category.html', context)
 class PostDetailView(HitCountDetailView):
     model = Post
     template_name = 'post.html'

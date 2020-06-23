@@ -1,0 +1,158 @@
+{% extends "base.html" %} 
+{% block content %}
+{% load hitcount_tags %}
+<style>
+  .post-body img {
+    width: 100%;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <!-- Latest Posts -->
+    <main class="post blog-post col-lg-8">
+      <div class="container">
+        <div class="post-single">
+          <div class="post-thumbnail">
+            <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid" />
+          </div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div class="category">
+                {% for cat in post.categories.all %}
+                  <a href={{cat.get_absolute_url}}>{{ cat }}</a>
+                {% endfor %}
+              </div>
+             
+            </div>
+            <h1>
+              {{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a>
+            </h1>
+            <div
+              class="post-footer d-flex align-items-center flex-column flex-sm-row"
+            >
+              <a href="#" class="author d-flex align-items-center flex-wrap">
+                <div class="avatar">
+                  <img
+                    src="{{ post.author.profile_picture.url }}"
+                    alt="..."
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="title">
+                  <span>{{ post.author.user.username }}</span>
+                </div></a
+              >
+              <div class="d-flex align-items-center flex-wrap">
+                <div class="date">
+                  <i class="icon-clock"></i> {{ post.timestamp|timesince }} ago
+                </div>
+                <div class="views">
+                  <i class="icon-eye"></i>{% get_hit_count for post %}
+                </div>
+                <div class="comments meta-last">
+                  <i class="icon-comment"></i>{{post.comment_count}}
+                </div>
+              </div>
+            </div>
+            <div class="post-body">
+              {{ post.overview | safe }}
+            </div>
+            <div
+              class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"
+            >
+              {% if post.previous_post %}
+              <a
+                href="{{ post.previous_post.get_absolute_url }}"
+                class="prev-post text-left d-flex align-items-center"
+              >
+                <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                <div class="text">
+                  <strong class="text-primary">Previous Post </strong>
+                  <h6>{{ post.previous_post.title }}</h6>
+                </div>
+              </a>
+              {% endif %} {% if post.next_post %}
+              <a
+                href="{{ post.next_post.get_absolute_url }}"
+                class="next-post text-right d-flex align-items-center justify-content-end"
+              >
+                <div class="text">
+                  <strong class="text-primary">Next Post </strong>
+                  <h6>{{ post.next_post.title }}</h6>
+                </div>
+                <div class="icon next"><i class="fa fa-angle-right"> </i></div>
+              </a>
+              {% endif %}
+            </div> 
+            
+           
+        </div>
+      </div>
+    </main>
+    <aside class="col-lg-4">
+     
+      <!-- Widget [Latest Posts Widget]        -->
+      <div class="widget latest-posts">
+        <header>
+          <h3 class="h6">Recent Posts</h3>
+        </header>
+        <div class="blog-posts">
+          {% for post in most_recent %}
+          <a href="{{ post.get_absolute_url }}">
+            <div class="item d-flex align-items-center">
+              <!-- <div class="image">
+                <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid" />
+              </div> -->
+              <div class="title">
+                <strong>{{ post.title }}</strong>
+                <div class="d-flex align-items-center">
+                 
+                  <!-- <div class="views">
+                    <i class="icon-eye"></i> {% get_hit_count for post %}
+                  </div> -->
+                  
+                  <!-- <div class="comments">
+                    <i class="icon-comment"></i>{{ post.comment_count }}
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Widget [Categories Widget]-->
+      <div class="widget categories">
+        <header>
+          <h3 class="h6">Categories</h3>
+        </header>
+        {% for cat in categories %}
+        <div class="item d-flex justify-content-between">
+          <a href="{{cat.get_absolute_url}}">{{ cat }}</a
+          >
+        </div>
+        {% endfor %}
+       
+      </div>
+      <!-- Widget [Tags Cloud Widget]-->
+      <div class="widget categories">
+        <header>
+          <h3 class="h6">Number of Content</h3>
+        </header>
+        {% for cat in category_count %} 
+        <div class="item d-flex justify-content-between">
+          <p>{{ cat.categories__title }}</p
+          > 
+           <span>
+        {{ cat.categories__title__count }}</span>
+        </div>
+         {%endfor%}
+        
+      </div> 
+   
+    </aside>
+    
+  </div>
+</div>
+
+{% endblock content %}

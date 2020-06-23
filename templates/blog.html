@@ -17,14 +17,11 @@
                 ><img
                   src="{{ post.thumbnail.url }}"
                   alt="..."
-                  class="img-fluid"
+                  class="img-fluid propic"
               /></a>
             </div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
-                {% comment %}
-                <div class="date meta-last">20 May | 2016</div>
-                {% endcomment %}
                 <div class="category">
                   {% for cat in post.categories.all %}
                   <a href={{cat.get_absolute_url}}>{{ cat }}</a>
@@ -51,7 +48,7 @@
                   </div>
                 </a>
                 <div class="date">
-                  <i class="icon-clock"></i>{{ post.timestamp|timesince }} ago
+                  <i class="icon-clock"></i>{{ post.timestamp|date:"F d, Y" }}
                 </div>
                 <div class="views">
                   <i class="icon-eye"></i>{% get_hit_count for post %}

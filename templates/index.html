@@ -2,7 +2,9 @@
   {% extends "base.html" %}
   {% load static %}
   {% block content %}  
-
+  
+  {% load hitcount_tags %}
+  
   <section class="featured-posts no-padding-top">
     <div class="container">
       <!-- Post-->
@@ -77,6 +79,45 @@
         </div>
         {% endfor %}
       </div>
+    </div>
+  </section>
+  <!-- Popular Post -->
+  <section class="pb-5 pt-1">
+    <section class="latest-posts"> 
+      <div class="container">
+          <h2 class='text-primary mb-5 border-info border-bottom border-height-3 pb-2'> POPULAR POSTS</h2>
+          <!-- popular posts listing 2 grid-->
+          <div class="row">
+            {% for obj in popular_posts %}
+            <div class="post col-md-4">
+              <div class="post-thumbnail"><a href="#"><img src="{{ obj.thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="date">{{ obj.timestamp }}</div>
+                  <li class="list-inline-item mx-2">
+                    <p class="text-uppercase meta-link font-weight-normal">
+                      
+                    </p>
+                </li>
+                  <div class="category">
+                    {% for cat in obj.categories.all %}
+                    <a href="#">{{ cat }}</a>
+                    {% endfor %}
+                    </div>
+                </div><a href="#">
+                  <h3 class="h4">{{ obj.title }}</h3></a>
+                <p class="text-muted">{{ obj.overview|striptags|truncatechars:200 }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          
+        </div>
+
+        <!-- Blog sidebar-->
+        
+      
     </div>
   </section>
   <!-- Newsletter Section-->

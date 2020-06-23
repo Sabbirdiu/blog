@@ -1,5 +1,6 @@
 <header class="header">
   <!-- Main Navbar-->
+  {% load static %}
   <nav class="navbar navbar-expand-lg">
     <div class="search-area">
       <div
@@ -30,7 +31,7 @@
       <div
         class="navbar-header d-flex align-items-center justify-content-between"
       >
-        <!-- Navbar Brand --><a href="/" class="navbar-brand">Sabbir </a>
+        <!-- Navbar Brand --><a href="/" class="navbar-brand"> <img src="{% static 'img/sabbirlogo.png' %}"  width="70" alt="logo"> </a>
         <!-- Toggle Button-->
         <button
           type="button"

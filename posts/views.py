@@ -48,7 +48,7 @@ def post_list(request):
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     post_list = Post.objects.all()
-    paginator = Paginator(post_list, 4)
+    paginator = Paginator(post_list, 8)
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
     try:
@@ -103,7 +103,7 @@ def Posts_in_CategoryView(request, id):
     return render(request, 'blog/posts_in_category.html', context)
 class PostDetailView(HitCountDetailView):
     model = Post
-    template_name = 'post.html'
+    template_name = 'post_detail.html'
     context_object_name = 'post'
     count_hit = True
     
@@ -118,6 +118,7 @@ class PostDetailView(HitCountDetailView):
     #     return obj
 
     def get_context_data(self, **kwargs):
+        categories = Category.objects.filter()
         category_count = get_category_count()
         this_post = Post.objects.filter(id=self.object.id)
         most_recent = Post.objects.order_by('-timestamp')[:5]
@@ -129,6 +130,7 @@ class PostDetailView(HitCountDetailView):
         context["tags"] = tags
         # context['page_request_var'] = "page"
         context['category_count'] = category_count
+        context['categories']= categories
         # context['form'] = self.form
         return context
 

@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
+{% load hitcount_tags %}
 
 <div class="container">
   <div class="row">
@@ -50,8 +53,8 @@
                 <div class="date">
                   <i class="icon-clock"></i>{{ post.timestamp|timesince }} ago
                 </div>
-                <div class="comments meta-last">
-                  <i class="icon-comment"></i>{{ post.comment_count }}
+                <div class="views">
+                  <i class="icon-eye"></i>{% get_hit_count for post %}
                 </div>
               </footer>
             </div>
@@ -149,7 +152,7 @@
       <!-- Widget [Categories Widget]-->
       <!-- Widget [Categories Widget]-->
       <div class="widget categories">
-        <header>
+        <header> 
           <h3 class="h6">Categories</h3>
         </header>
         {% for cat in categories %}

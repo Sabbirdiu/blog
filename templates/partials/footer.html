@@ -1,4 +1,16 @@
   {% load static %}
+  <style>
+  .reset-anchor {
+  color: whitesmoke;
+  transition: all 0.3s;
+}
+
+.reset-anchor:hover,
+.reset-anchor:focus {
+  color: #62cec2;
+  text-decoration: none;
+}
+  </style>
   <footer class="py-4" style="background: #111">
     <div class="container text-center">
       <div class="row align-items-center">
@@ -8,22 +20,22 @@
   
         <div class="col-md-4 text-center">
           <div class="d-flex align-items-center flex-wrap justify-content-center">
-            <h6 class="text-muted mb-0 py-2 mr-3">follow me<span class="ml-3">-</span></h6>
+            <h6 class="text-muted mb-0 py-2 mr-3 h-4">follow me<span class="ml-3">-</span></h6>
             <ul class="list-inline small mb-0 text-white">
                <li class="list-inline-item text-primary"><a class="reset-anchor" target="blank" href="https://www.facebook.com/profile.php?id=100005325077639">
-                  <i class="fa fa-facebook"></i></a>
+                  <i class="fa fa-facebook fa-2x"></i></a>
               </li>
                <li class="list-inline-item text-primary" text-primary><a class="reset-anchor" target="blank" href="https://www.linkedin.com/in/sabbir-hossain-525b19198/">
-                  <i class="fa fa-linkedin"></i></a>
+                  <i class="fa fa-linkedin fa-2x"></i></a>
               </li>
                <li class="list-inline-item text-primary"><a class="reset-anchor" target="blank" href="https://github.com/Sabbirdiu">
-                  <i class="fa fa-github"></i></a>
+                  <i class="fa fa-github fa-2x"></i></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-md-4 text-lg-right">
-          <p class="mb-0 text-muted text-small text-heading">&copy; 2020. All rights reserved| <a href="#" class="text-reset"> <img src="{% static 'img/sabbirlogo.png' %}"  width="70" alt="logo"></a>
+          <p class="mb-0 text-muted text-small text-heading">&copy; 2020 All rights reserved| <a href="#" class="text-reset"> <img src="{% static 'img/sabbirlogo.png' %}"  width="70" alt="logo"></a>
           </p>
         </div>
       </div>

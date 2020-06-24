@@ -24,6 +24,8 @@ def index(request):
     featured = Post.objects.filter(featured=True)
     latest = Post.objects.order_by('-timestamp')[0:3]
     popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
+    categories = Category.objects.filter()
+    category_count = get_category_count()
     if request.method == "POST":
         email = request.POST["email"]
         new_signup = Signup()
@@ -32,7 +34,9 @@ def index(request):
     context = {
         'object_list':featured,
         'latest':latest,
-        'popular_posts':popular_posts
+        'popular_posts':popular_posts,
+        'categories':categories,
+        'category_count':category_count
     }
     return render(request, 'index.html',context)
 

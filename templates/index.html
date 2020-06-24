@@ -4,6 +4,41 @@
   {% block content %}  
   
   {% load hitcount_tags %}
+
+  <!-- categori -->
+  <div class="container mt-5" >
+    <div class="row ">
+  <div class="widget categories  col-lg-5 mr-2">
+    <header>
+      <h3 class="h6">Categories</h3>
+    </header>
+    {% for cat in categories %}
+    <div class="item d-flex justify-content-between">
+      <a href="{{cat.get_absolute_url}}">{{ cat }}</a
+      >
+    </div>
+    {% endfor %}
+   
+  </div>
+
+  
+  <div class="widget categories col-lg-5">
+    <header>
+      <h3 class="h6">Number of Content</h3>
+    </header>
+    {% for cat in category_count %} 
+    <div class="item d-flex justify-content-between">
+      <p>{{ cat.categories__title }}</p
+      > 
+       <span>
+    {{ cat.categories__title__count }}</span>
+    </div>
+     {%endfor%}
+    
+  </div> 
+
+</div>
+
     <!-- Popular Post -->
     <section class="pb-5 pt-1">
       <section class="latest-posts"> 
@@ -25,7 +60,7 @@
                   </li>
                     <div class="category">
                       {% for cat in obj.categories.all %}
-                      <a href="{{cat.get_absolute_url}}">{{ cat }}</a>
+                      <a  href="{{cat.get_absolute_url}}">{{ cat }}</a>
                       {% endfor %}
                       </div>
                   </div><a href="{{ obj.get_absolute_url }}">

@@ -52,7 +52,7 @@ def get_category_count():
 def post_list(request):
     categories = Category.objects.all()
     category_count = get_category_count()
-    most_recent = Post.objects.order_by('-timestamp')[:3]
+    most_recent = Post.objects.order_by('-timestamp')[:8]
     post_list = Post.objects.order_by('-timestamp')
     paginator = Paginator(post_list, 8)
     page_request_var = 'page'

@@ -1,0 +1,53 @@
+
+
+.indexheader{
+height: 80vh;
+background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(https://i.imgur.com/6FIkhZa.png);
+
+background-size:cover ;
+background-position:center bottom;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: sans-serif;
+background-attachment: fixed;
+background-repeat: no-repeat;
+
+
+}
+.indexheader h1{
+color: #fff;
+margin-bottom: 70px;
+font-size: 45px;
+letter-spacing: 2px;
+
+}
+.indexheader .search-field{
+height: 50px;
+padding: 10px;
+border: none;
+border-radius: 25px;
+outline: none;
+}
+.indexheader .business{
+width: 250px;
+
+}
+.search-button{
+
+height: 50px;
+width: 100px;
+background: #ffeb3b;
+border: none;
+color: #000;
+border-radius: 25px;
+}
+.search-button:hover{
+background: #ffc107;
+cursor: pointer;
+}
+.form-box{
+background: rgba(0,0,0,0.5);
+padding: 30px;
+}
+

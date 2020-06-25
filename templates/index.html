@@ -4,6 +4,18 @@
   {% block content %}  
   
   {% load hitcount_tags %}
+  
+  <!-- header section -->
+  <div class="indexheader">
+    <form action="{% url 'search' %}">
+      <h1>Find what's you need</h1>
+      <div class="form-box">
+        <input  name="q" type="text" class="search-field business"  placeholder="Search Here">
+        <button class="search-button" type="button">Search</button>
+       
+      </div>
+    </form>
+  </div>
 
   <!-- categori -->
   <div class="container mt-5" >

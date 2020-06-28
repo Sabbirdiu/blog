@@ -6,7 +6,8 @@ from marketing.models import Signup
 from hitcount.views import HitCountDetailView
 from django.views.generic import  DetailView
 # Create your views here.
-
+def about(request):
+    return render(request,'about.html')
 def search(request):
     queryset = Post.objects.all()
     query = request.GET.get('q')
@@ -16,7 +17,8 @@ def search(request):
             Q(overview__icontains=query)
         ).distinct()
     context = {
-        'queryset': queryset
+        'queryset': queryset,
+        'query':query
     }
     return render(request, 'search_results.html', context)
 
@@ -89,7 +91,7 @@ def Posts_in_CategoryView(request, id):
     posts_in_cat = category.post_set.all()
 
     # pagination
-    paginator = Paginator(posts_in_cat, 8) # Show 8 posts per page
+    paginator = Paginator(posts_in_cat, 5) # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

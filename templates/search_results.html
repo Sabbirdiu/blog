@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<style>
+.searchtitle{
+    text-decoration: none;
+} 
+.reset-ancho{
+    color: black;
+} 
+.reset-ancho:hover,
+.reset-ancho:focus {
+  color: #62cec2;
+  text-decoration: none;
+}
+</style>
   
-
-<h2>This is the results of your search</h2>
+<div class="container" >
+<h2 class='text-primary mb-3 mt-3 border-info border-bottom border-height-3 pb-2'>This is the results of your search</h2>
+<h1 class="mb-3" style='font-family:monospace;color:green;'>Search results on "{{query|lower}}"</h1>
+<div class="  " >
 {% for post in queryset %}
-    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    <a class="text-decoration-none reset-ancho  " href="{{ post.get_absolute_url }}">{{ post.title }}</a>
     <br />
 {% endfor %}
+</div>
  <!-- Blog listing-->
-
+</div> 
  
 {% endblock %}

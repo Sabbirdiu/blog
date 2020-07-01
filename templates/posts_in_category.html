@@ -3,18 +3,31 @@
 
 {% load hitcount_tags %}
 <style>
-    .category-link {
+    .category-links {
   padding: 0.3rem 1rem;
-  color: #fff;
-  background: #62cec2;
+  color: black;
+  /* background: #62cec2; */
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  font-size: 0.7rem;
+  letter-spacing: 0.0rem;
+  font-size: 0.9rem;
   
 }
-.category-link:hover,
-.category-link:focus {
-  color: #fff;
+.category-links:hover,
+.category-links:focus {
+  color:#62cec2;;
+  text-decoration: none;
+}
+.reset-ancho {
+  color: black;
+  transition: all 0.3s;
+}
+
+.reset-ancho:hover,
+.reset-ancho:focus {
+  color: #62cec2;
+  text-decoration: none;
+}
+.username{
   text-decoration: none;
 }
     </style> 
@@ -22,9 +35,9 @@
   <section class="py-5">
      <div class="container py-4">
        <div class="row">
-         <div class="col-lg-2"> </div>
+         <div class="col-lg-3"> </div>
          <!-- Blog listing-->
-        
+         <h1 class="mb-5 border-info border-bottom border-height-3" style='font-family:monospace;color:green;'>All posts in "{{cat_name|lower}}"</h1>
             <!--post listing--> 
           {% if page_obj %}
            {% for post in page_obj %}
@@ -36,20 +49,20 @@
                 <ul class="list-inline">
                   {% for c in post.categories.all %}
                     {% if forloop.first or forloop.last%}
-                      <li class="list-inline-item mr-2"><a class="category-link font-weight-normal"
+                      <li class="list-inline-item mr-2"><a class="category-links font-weight-normal"
                         href={{c.get_absolute_url}}>{{c}}</a></li>
                     {% endif %}
                   {% endfor %}
                  
                   </li>
-                  <li class="list-inline-item mx-2">
-                    <a class="text-uppercase meta-link font-weight-normal" href="#"> 
-                       <i class="icon-tie title"></i> {{ post.author.user.username }}
+                  <!-- <li class="list-inline-item mx-2">
+                    <a class="text-uppercase meta-link font-weight-normal username" href="#"> 
+                       <i class=" title"></i> {{ post.author.user.username }}
                     </a>
-                </li>
+                </li> -->
                   <li class="list-inline-item mx-2">
                     <b class="text-uppercase meta-link font-weight-normal" href="#">
-                    <i class="icon-clock"></i> {{ post.timestamp|timesince }} ago</b>
+                    <i class="icon-clock"></i> {{ post.timestamp|date:"F d, Y" }}</b>
                   </li>
                   <li class="list-inline-item mx-2">
                 <p class="text-uppercase meta-link font-weight-normal">
@@ -58,16 +71,16 @@
             </li>
                 </ul>
                 <h2 class="h3 mb-4"> 
-                  <a class="d-block reset-anchor " href={{post.get_absolute_url}}>{{post.title}}</a>
+                  <a class="d-block reset-ancho" href={{post.get_absolute_url}}>{{post.title}}</a>
                 </h2>
                 <p class="text-muted">  {{ post.overview|striptags|truncatechars:200 }}</p>
-                    <a class="btn btn-link p-0 read-more-btn" href={{post.get_absolute_url}}>
+                    <a class="btn btn-link p-0 read-more-btn category-links" href={{post.get_absolute_url}}>
                     <span>Read more</span> <i class="fas fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
            {% endfor %}
           {% else %}
-              <h2 class='mt-5'> Sorry! No results found. Try again searching with different keyword.</h2>
+              <h2 class='mt-'>   : Sorry! No results found.</h2>
           {% endif %}
            <!--pagination-->
            <nav aria-label="Page navigation example">
@@ -92,6 +105,6 @@
       <div class="col-lg-2"> </div>
     </div>
   </div>
-</section>>
+</section>
 
 {% endblock content %}

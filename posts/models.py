@@ -65,6 +65,7 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'pk': self.pk
         })
-# you would access your hit_count like so:
-                # total number of hits
-# my_model.hit_count.hits_in_last(days=7) # number of hits in last seven days        
+class About(models.Model):
+    overview = RichTextUploadingField()
+    image = models.ImageField(upload_to='uploads/')
+            

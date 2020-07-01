@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+   
+
+
+.body {
+    color: #fff;
+}
+img {
+    vertical-align: middle;
+    display: inline-block;
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+    outline: 0;
+}
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: 0;
+}
+ul,
+li,
+ol {
+    list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+ul,
+ol,
+li {
+    padding: 0;
+    margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+}
+
+/*=====common css end=-======*/
+
+
+/*====Banner part=======*/
+
+
+.heading {
+    padding-top: 180px;
+    padding-bottom: 180px;
+}
+.heading h1 {
+    font-size: 60px;
+    text-transform: capitalize;
+    padding-bottom: 30px;
+}
+.heading p {
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+/*====Biography part=======*/
+
+#biography {
+    background: #f7f7f7;
+}
+#biography .about_me {
+    padding: 80px 0 60px 0;
+    ;
+}
+#biography .heading {
+    padding: 0;
+}
+#biography .heading h2 {
+    font-size: 36px;
+    color: #262626;
+    padding-bottom: 40px;
+    position: relative;
+}
+#biography .heading h2:after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 80px;
+    background: #26bdef;
+}
+#biography .heading p {
+    font-size: 16px;
+    color: #262626;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    font-weight: 400;
+}
+#biography .social_icons {
+    background: #fff;
+    padding: 15px 0;
+}
+#biography .social_icons a i {
+    font-size: 24px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+#biography .social_icons a i.fa-facebook {
+    background: #3b5998;
+}
+#biography .social_icons a i.fa-github {
+    background: #333333;
+}
+#biography .social_icons a i.fa-linkedin {
+    background: #0077b5;
+}
+
+
+</style>
+
+<div class="body">
+  <section id="biography">
+    <div class="container">
+        <div class="about_me">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="content">
+                        <div class="heading">
+                            <h2>Biography</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam quis neque laudantium ratione, illum repudiandae possimus. Rerum optio quae harum unde eos quo eaque quod voluptatibus velit,
+                                <br> ullam amet error, alias distinctio in, cupiditate dolorum? Modi sequi, ea optio maxime. Numquam, suscipit dolorum voluptates nesciunt consequatur eligendi quibusdam quasibr
+                                <br> necessitatibus molestias est error, alias reiciendis aliquid temporibus, dolore perferendis commodi minus. Minus ab hic facilis cum impedit pariatur, culpa at omnis expedita dolorem ex maxime officiis saepe ratione, totam itaque repudiandae eum similique recusandae repellat voluptate sit. Nemo eius commodi alias laborum aperiam tempora incidunt velit culpa, impedit ullam, repellat quaerat dolorem!
+                                <br>
+                                <br>Reiciendis maiores quibusdam expedita cum fuga a autem illum recusandae, nisi necessitatibus neque nostrum ipsa quisquam eius cumque, natus iusto cupiditate. Cumque ipsum corporis maxime atque asperiores qui nesciunt. Hic, iste </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image">
+                        <img src="{% static 'img/sabbir.jpg' %}" class="img-fluid" alt="me">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social_icons text-center">
+        <a  target="blank" href="https://www.facebook.com/profile.php?id=100005325077639"><i class="fa fa-facebook"></i></a>
+        <a  target="blank" href="https://github.com/Sabbirdiu"><i class="fa fa-github"></i></a>
+        <a  target="blank" href="https://www.linkedin.com/in/sabbir-hossain-525b19198/ "><i class="fa fa-linkedin"></i></a>
+    </div>
+</section>
+
+</div>
+{% endblock %}

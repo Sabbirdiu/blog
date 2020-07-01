@@ -4,13 +4,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 
-from posts.views import index, post_list,search,PostDetailView,Posts_in_CategoryView,about
+from posts.views import index, post_list,search,PostDetailView,Posts_in_CategoryView,About
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
     path('blog/',post_list),
-    path('about/',about),
+    path('about/',About.as_view(),name='about'),
     path('search/',search,name='search'),
     # path('post/',post),
     path('post/<pk>/', PostDetailView.as_view(), name='post-detail'),

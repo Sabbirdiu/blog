@@ -58,7 +58,7 @@ h6 {
 
 
 .heading {
-    padding-top: 180px;
+    padding-top: ;
     padding-bottom: 180px;
 }
 .heading h1 {
@@ -140,20 +140,20 @@ h6 {
             <div class="row">
                 <div class="col-lg-6">
                     <div class="content">
+                        {% for about in object_list %}
                         <div class="heading">
                             <h2>Biography</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam quis neque laudantium ratione, illum repudiandae possimus. Rerum optio quae harum unde eos quo eaque quod voluptatibus velit,
-                                <br> ullam amet error, alias distinctio in, cupiditate dolorum? Modi sequi, ea optio maxime. Numquam, suscipit dolorum voluptates nesciunt consequatur eligendi quibusdam quasibr
-                                <br> necessitatibus molestias est error, alias reiciendis aliquid temporibus, dolore perferendis commodi minus. Minus ab hic facilis cum impedit pariatur, culpa at omnis expedita dolorem ex maxime officiis saepe ratione, totam itaque repudiandae eum similique recusandae repellat voluptate sit. Nemo eius commodi alias laborum aperiam tempora incidunt velit culpa, impedit ullam, repellat quaerat dolorem!
-                                <br>
-                                <br>Reiciendis maiores quibusdam expedita cum fuga a autem illum recusandae, nisi necessitatibus neque nostrum ipsa quisquam eius cumque, natus iusto cupiditate. Cumque ipsum corporis maxime atque asperiores qui nesciunt. Hic, iste </p>
-                        </div>
+                            
+                            <p>{{about.overview|striptags}}</p>
+                            </div> 
+                           
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="image">
-                        <img src="{% static 'img/sabbir.jpg' %}" class="img-fluid" alt="me">
+                        <img src=  "{{ about.image.url }}" class="img-fluid" alt="me">
                     </div>
+                        {% endfor %}
                 </div>
             </div>
         </div>

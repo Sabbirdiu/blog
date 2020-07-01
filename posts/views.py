@@ -1,13 +1,15 @@
 from django.db.models import Count, Q
 from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Post,Category
+from .models import Post,Category,About
 from marketing.models import Signup
+from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
 from django.views.generic import  DetailView
 # Create your views here.
-def about(request):
-    return render(request,'about.html')
+class About(ListView):
+    template_name ='about.html'
+    model = About
 def search(request):
     queryset = Post.objects.all()
     query = request.GET.get('q')

@@ -88,12 +88,12 @@ def post_list(request):
 #     }
 #     return render(request, 'post.html',context)   
 
-def Posts_in_CategoryView(request, id):
-    category = get_object_or_404(Category, id = id)
+def Posts_in_CategoryView(request, slug):
+    category = get_object_or_404(Category, slug=slug)
     posts_in_cat = category.post_set.all()
 
     # pagination
-    paginator = Paginator(posts_in_cat, 5) # Show 8 posts per page
+    paginator = Paginator(posts_in_cat, 8) # Show 8 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

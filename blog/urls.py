@@ -13,9 +13,9 @@ urlpatterns = [
     path('about/',About.as_view(),name='about'),
     path('search/',search,name='search'),
     # path('post/',post),
-    path('post/<pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<slug:slug>/', PostDetailView.as_view(), name='post-detail'),
     # path('post/<id>/',post, name='post-detail'),
-    path("category/<int:id>/posts", Posts_in_CategoryView, name="posts_in_category"),
+    path("category/<slug:slug>/posts", Posts_in_CategoryView, name="posts_in_category"),
     path('ckeditor/',include('ckeditor_uploader.urls')),
     #3rd party
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),

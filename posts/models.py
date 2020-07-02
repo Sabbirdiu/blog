@@ -21,12 +21,13 @@ class Author(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=20)
+    slug = models.SlugField(null=True)
 
     def __str__(self):
         return self.title
     def get_absolute_url(self):
         return reverse('posts_in_category', kwargs={
-            'id': self.id
+            'slug': self.slug
         })
     
     def save(self, *args, **kwargs):
@@ -38,7 +39,9 @@ class Category(models.Model):
 only_aphabets =  RegexValidator(r'^[, a-zA-Z]*$', 'Enter comma separated tags. (use space for two words tag)')        
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    overview = RichTextUploadingField()
+    slug = models.SlugField()
+    overview = RichTextUploadingField(null=True)
+
     timestamp = models.DateTimeField(auto_now_add=True)
     comment_count = models.IntegerField(default = 0)
     tags = models.CharField(max_length=60, blank=True, validators=[only_aphabets])
@@ -63,9 +66,11 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={
-            'pk': self.pk
+            'slug': self.slug
         })
 class About(models.Model):
     overview = RichTextUploadingField()
-    image = models.ImageField(upload_to='uploads/')
-            
+    image = models.ImageField(upload_to='uploads/')        
+# you would access your hit_count like so:
+                # total number of hits
+# my_model.hit_count.hits_in_last(days=7) # number of hits in last seven days        

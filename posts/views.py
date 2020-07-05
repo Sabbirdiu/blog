@@ -1,7 +1,8 @@
 from django.db.models import Count, Q
 from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Post,Category,About
+from .models import Post,Category,About,Comment
+from .forms import CommentForm
 from marketing.models import Signup
 from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
@@ -141,8 +142,29 @@ class PostDetailView(HitCountDetailView):
         # context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['categories']= categories
+        context['comments']=comments
+        context['new_comment']=new_comment
+        context['comment_form']=comment_form
+
         # context['form'] = self.form
         return context
+    def post(self,request,*args,**kwargs):
+         # List of active comments for this post
+        comments = post.comments.filter(active=True)
+        new_comment = None    
+
+        if request.method == 'POST':
+        # A comment was posted
+            comment_form = CommentForm(data=request.POST)
+            if comment_form.is_valid():
+                # Create Comment object but don't save to database yet
+                new_comment = comment_form.save(commit=False)
+                # Assign the current post to the comment
+                new_comment.post = post
+                # Save the comment to the database
+                new_comment.save()
+        else:
+            comment_form = CommentForm()
 
     # def post(self, request, *args, **kwargs):
     #     # form = CommentForm(request.POST)

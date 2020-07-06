@@ -6,6 +6,19 @@
   .post-body img {
     width: 100%;
   }
+  /* comments */
+.comment {
+    padding:10px;
+}
+.comment:nth-child(even) {
+    background:#efefef;
+}
+.comment .info {
+    font-weight:bold;
+    font-size:12px;
+    color:#666;
+}  
+  
 </style>
 <div class="container">
   <div class="row">
@@ -86,7 +99,7 @@
               {% endif %}
             </div> 
             
-            {% with comments.count as total_comments %}
+      {% with comments.count as total_comments %}
       <h2>
         {{ total_comments }} comment{{ total_comments|pluralize }}
       </h2>
@@ -110,7 +123,7 @@
       <form  method="post">
         {{ form | crispy }}
         {% csrf_token %}
-        <p><input type="submit" value="Submit"></p>
+        <p><input class="btn btn-outline-secondary" type="submit" value="Submit"></p>
       </form>
       {% endif %} 
         </div>

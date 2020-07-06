@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'hitcount',
+    'crispy_forms',
 
     #locacl
     'django.contrib.admin',
@@ -134,6 +135,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CKEDITOR_CONFIGS = {
     'default':{

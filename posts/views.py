@@ -1,5 +1,5 @@
 from django.db.models import Count, Q
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post,Category,About,Comment
 from .forms import CommentForm
@@ -78,16 +78,7 @@ def post_list(request):
         # 'form': form
     }
     return render(request, 'blog.html', context)
-# def post(request, id):
-#     category_count = get_category_count()
-#     most_recent = Post.objects.order_by('-timestamp')[:6]
-#     post = get_object_or_404(Post, id=id)
-#     context = {
-#         'post':post,
-#         'most_recent': most_recent,
-#         'category_count': category_count,
-#     }
-#     return render(request, 'post.html',context)   
+  
 
 def Posts_in_CategoryView(request, slug):
     category = get_object_or_404(Category, slug=slug)
@@ -111,30 +102,30 @@ def Posts_in_CategoryView(request, slug):
    
       
 
-    return render(request, 'blog/posts_in_category.html', context)
+    # return render(request, 'blog/posts_in_category.html', context)
 class PostDetailView(HitCountDetailView):
     model = Post
     template_name = 'post_detail.html'
     context_object_name = 'post'
-    count_hit = True
     
-
-    # def get_object(self):
-    #     obj = super().get_object()
-    #     if self.request.user.is_authenticated:
-    #         PostView.objects.get_or_create(
-    #             user=self.request.user,
-    #             post=obj
-    #         )
-    #     return obj
-
+    count_hit = True
+    # post = self.get_object()
+    # comments = post.comments.filter(active=True)
+    form=CommentForm()
+    new_comment = None
+    
+ 
     def get_context_data(self, **kwargs):
+        # post = get_object_or_404(Post, slug=slug)
         categories = Category.objects.filter()
         category_count = get_category_count()
         this_post = Post.objects.filter(id=self.object.id)
         most_recent = Post.objects.order_by('-timestamp')[:5]
         popular_posts = Post.objects.order_by('-hit_count__hits')[:3]
         tags = [tag.strip() for tag in this_post[0].tags.split(',')]
+        post = self.get_object()
+        comments = post.comments.filter(active=True)
+        
         context = super().get_context_data(**kwargs)
         context["popular_posts"] = popular_posts
         context['most_recent'] = most_recent
@@ -142,39 +133,69 @@ class PostDetailView(HitCountDetailView):
         # context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['categories']= categories
-        context['comments']=comments
-        context['new_comment']=new_comment
-        context['comment_form']=comment_form
-
-        # context['form'] = self.form
+        
+        context['form'] = self.form
+        context['new_comment'] = self.new_comment
+        context['comments'] = comments
+    
         return context
-    def post(self,request,*args,**kwargs):
-         # List of active comments for this post
-        comments = post.comments.filter(active=True)
-        new_comment = None    
 
+
+    def post(self, request, *args, **kwargs):
+       
+        post = self.get_object()
         if request.method == 'POST':
         # A comment was posted
-            comment_form = CommentForm(data=request.POST)
-            if comment_form.is_valid():
+           form = CommentForm(data=request.POST)
+           if form.is_valid():
                 # Create Comment object but don't save to database yet
-                new_comment = comment_form.save(commit=False)
+                new_comment = form.save(commit=False)
                 # Assign the current post to the comment
                 new_comment.post = post
                 # Save the comment to the database
                 new_comment.save()
+                return redirect(reverse("post-detail", kwargs={
+                    'slug': post.slug
+            }))
         else:
-            comment_form = CommentForm()
-
-    # def post(self, request, *args, **kwargs):
-    #     # form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         post = self.get_object()
-    #         form.instance.user = request.user
-    #         form.instance.post = post
-    #         form.save()
-    #         return redirect(reverse("post-detail", kwargs={
-    #             'pk': post.pk
-    #         }))
+            form = CommentForm()
+    
 
 
+
+def post_detail(request, slug):
+    category_count = get_category_count()
+    most_recent = Post.objects.order_by('-timestamp')[:8]
+    post = get_object_or_404(Post, slug=slug)
+    # count_hit = True
+
+    comments = post.comments.filter(active=True)
+    category_count = get_category_count()
+
+    new_comment = None
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    
+    context = {
+        'post': post,
+        'most_recent': most_recent,
+        'category_count': category_count,
+        # 'form': form,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form,
+        'category_count':category_count
+    }
+    return render(request, 'post_detail.html', context)
+    count_hit = True

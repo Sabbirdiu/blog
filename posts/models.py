@@ -43,7 +43,7 @@ class Post(models.Model):
     overview = RichTextUploadingField(null=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)
-    comment_count = models.IntegerField(default = 0)
+    
     tags = models.CharField(max_length=60, blank=True, validators=[only_aphabets])
     # 3rd party field
     hit_count = GenericRelation(
